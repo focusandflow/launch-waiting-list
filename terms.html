@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus - Terms of Service</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --accent-color: #38bdf8;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Canvas Background */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Main Container - Glassmorphism */
+        .container {
+            position: relative;
+            z-index: 10;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            max-width: 800px;
+            width: 90%;
+            margin: 4rem auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            color: var(--text-secondary);
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        li { margin-bottom: 0.5rem; }
+
+        /* Back Link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover { opacity: 0.8; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 2rem 1.5rem; margin: 2rem auto; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas-bg"></canvas>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        
+        <h1>Terms of Service</h1>
+
+        <p>Last updated: November 2023</p>
+
+        <h2>1. Introduction</h2>
+        <p>Welcome to Nexus ("Company", "we", "our", "us"). By accessing or using our website, waitlist, or services, you agree to be bound by these Terms of Service ("Terms"). If you disagree with any part of the terms, you may not access the service.</p>
+
+        <h2>2. Early Access & Waitlist</h2>
+        <p>Joining the waitlist allows you to express interest in our upcoming product. We reserve the right to accept or reject any entry at our sole discretion. Being on the waitlist does not guarantee access to the beta product.</p>
+
+        <h2>3. Intellectual Property</h2>
+        <p>The Service and its original content, features, and functionality are and will remain the exclusive property of Nexus and its licensors. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Nexus.</p>
+
+        <h2>4. User Responsibilities</h2>
+        <p>By using our services, you agree not to:</p>
+        <ul>
+            <li>Use the service for any unlawful purpose or to solicit others to perform or participate in any unlawful acts.</li>
+            <li>Infringe upon or violate our intellectual property rights or the intellectual property rights of others.</li>
+            <li>Submit false or misleading information.</li>
+            <li>Attempt to decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the Service.</li>
+        </ul>
+
+        <h2>5. Limitation of Liability</h2>
+        <p>In no event shall Nexus, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.</p>
+
+        <h2>6. Changes to Terms</h2>
+        <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+
+        <h2>7. Contact Us</h2>
+        <p>If you have any questions about these Terms, please contact us at support@nexus-example.com.</p>
+    </div>
+
+    <script>
+        /* Reusing the Particle Animation for consistency */
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let w, h, particles;
+        const particleCount = 40; // Reduced count for text pages for performance
+        const connectionDistance = 150;
+        const mouseDistance = 200;
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('resize', resize);
+
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * h;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > w) this.vx *= -1;
+                if (this.y < 0 || this.y > h) this.vy *= -1;
+                
+                // Simple mouse repulsion
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+                if (distance < mouseDistance) {
+                    const force = (mouseDistance - distance) / mouseDistance;
+                    this.x -= (dx / distance) * force * 0.6;
+                    this.y -= (dy / distance) * force * 0.6;
+                }
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, w, h);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx*dx + dy*dy);
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${1 - distance/connectionDistance})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        resize();
+        animate();
+    </script>
+</body>
+</html>
